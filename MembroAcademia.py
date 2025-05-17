@@ -2,4 +2,5 @@ from abc import ABC
 
 
 class(ABC):
-    pass
+    def __init__(self, nome):
+        self.__nome = nome
