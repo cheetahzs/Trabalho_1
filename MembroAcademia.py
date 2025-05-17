@@ -1,1 +1,5 @@
-hth6h6j6
+from abc import ABC
+
+
+class(ABC):
+    pass
