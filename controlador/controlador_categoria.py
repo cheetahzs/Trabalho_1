@@ -15,7 +15,7 @@ class ControladorCategoria():
                 return categoria
         return None
     
-    def inclui_categoria(self):
+    def incluir_categoria(self):
         dados_categoria = self.__tela_categoria.pega_dados_categoria()
         nome = dados_categoria["nome"]
         categoria = self.pega_categoria(nome)
@@ -60,6 +60,7 @@ class ControladorCategoria():
 
     def abre_tela(self):
         lista_opcoes = {1: self.incluir_categoria, 2: self.alterar_categoria,
-                         3: self.lista_categoria, 4: self.excluir_categoria, 0: self.retornar}
-        while True:
+                         3: self.lista_categorias, 4: self.excluir_categoria, 0: self.retornar}
+        continua = True
+        while continua:
             lista_opcoes[self.__tela_categoria.tela_opcoes()]()
