@@ -13,7 +13,7 @@ class TelaCategoria:
     def pega_dados_categoria(self):
         print("-------- DADOS CATEGORIA ----------")
         nome = input("Nome: ")
-        return {"nome:": nome}
+        return {"nome": nome}
     
     def mostra_categoria(self, dados_categoria):
         print("CATEGORIA: ", dados_categoria["nome"])
