@@ -25,48 +25,48 @@ class ControladorDiretor():
                              dados_diretor["data_de_nascimento"], dados_diretor["nacionalidade"])
                 self.__diretores.append(diretor)
             else:
-                raise AtorRepetidoException(id)
-        except AtorRepetidoException as e:
-            self.__tela_ator.mostra_mensagem(e)
+                raise DiretorRepetidoException(id)
+        except DiretorRepetidoException as e:
+            self.__tela_diretor.mostra_mensagem(e)
 
-    def lista_atores(self):
-        for ator in self.__atores:
-            self.__tela_ator.mostra_ator({"id": ator.id, "nome": ator.nome,
-                                         "data_de_nacimento": ator.data_de_nascimento,
-                                         "nacionalidade": ator.nacionalidade })
+    def lista_diretores(self):
+        for diretor in self.__diretores:
+            self.__tela_diretor.mostra_diretor({"id": diretor.id, "nome": diretor.nome,
+                                         "data_de_nacimento": diretor.data_de_nascimento,
+                                         "nacionalidade": diretor.nacionalidade })
     
-    def alterar_ator(self):
-        self.lista_atores()
-        id_ator = self.__tela_ator.seleciona_ator()
-        ator = self.pega_ator(id_ator)
+    def alterar_diretor(self):
+        self.lista_diretores()
+        id_diretor = self.__tela_diretor.seleciona_diretor()
+        diretor = self.pega_diretor(id_diretor)
 
-        if(ator is not None):
-            novos_dados_ator = self.__tela_ator.pega_dados_ator()
-            ator.id = novos_dados_ator["id"]
-            ator.nome = novos_dados_ator["nome"]
-            ator.data_de_nascimento = novos_dados_ator["data_de_nascimento"]
-            ator.nacionalidade = novos_dados_ator["nacionalidade"]
+        if(diretor is not None):
+            novos_dados_diretor = self.__tela_diretor.pega_dados_diretor()
+            diretor.id = novos_dados_diretor["id"]
+            diretor.nome = novos_dados_diretor["nome"]
+            diretor.data_de_nascimento = novos_dados_diretor["data_de_nascimento"]
+            diretor.nacionalidade = novos_dados_diretor["nacionalidade"]
             self.lista_atores()
         else:
-            self.__tela_ator.mostra_mensagem("Este ator nao existe")
+            self.__tela_diretor.mostra_mensagem("Este diretor nao existe")
 
-    def excluir_ator(self):
-        self.lista_atores()
-        id_ator = self.__tela_ator.seleciona_ator()
-        ator = self.pega_ator(id_ator)
+    def excluir_diretor(self):
+        self.lista_diretores()
+        id_diretor = self.__tela_diretor.seleciona_diretor()
+        diretor = self.pega_diretor(id_diretor)
 
-        if ator is not None:
-            self.__atores.remove(ator)
-            self.lista_atores()
+        if diretor is not None:
+            self.__diretores.remove(diretor)
+            self.lista_diretores()
         else:
-            self.__tela_ator.mostra_mensagem("Este ator nao existe")
+            self.__tela_diretor.mostra_mensagem("Este diretor nao existe")
 
     def retornar(self):
         self.__controlador_sistema.abre_tela()
 
     def abre_tela(self):
-        lista_opcoes = {1: self.incluir_ator, 2: self.alterar_ator,
-                         3: self.lista_atores, 4: self.excluir_ator, 0: self.retornar}
+        lista_opcoes = {1: self.incluir_diretor, 2: self.alterar_diretor,
+                         3: self.lista_diretores, 4: self.excluir_diretor, 0: self.retornar}
         continua = True
         while continua:
-            lista_opcoes[self.__tela_ator.tela_opcoes()]()
+            lista_opcoes[self.__tela_diretor.tela_opcoes()]()
