@@ -32,3 +32,7 @@ class ControladorFilme:
             self.__tela_filme.mostra_mensagem("Filme já existente com esse ID.")
 =======
 >>>>>>> 0a3bf2f912fe4dd8a9c7ead8adcafe7645c1591d
+            
+    def alterar_filme(self):
+        self.lista_filmes()
+        id_filme = self.__tela_filme.seleciona_filme()
