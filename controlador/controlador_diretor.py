@@ -18,7 +18,7 @@ class ControladorDiretor():
     def incluir_diretor(self):
         dados_diretor = self.__tela_diretor.pega_dados_diretor()
         id = dados_diretor["id"]
-        adiretortor = self.pega_diretor(id)
+        diretor = self.pega_diretor(id)
         try:
             if diretor == None:
                 diretor = Diretor(dados_diretor["id"], dados_diretor["nome"],
