@@ -10,3 +10,10 @@ class telaFilme:
         print("0 - Retornar")
         opcao = int(input("Escolha uma opção: "))
         return opcao
+    
+    def pega_dados_filme(self):
+        print("-------DADOS DO FILME-------")
+        id = int(input("Informe o ID do Filme: "))
+        titulo = input("Informe o Titulo: ")
+        ano = int(input("Informe o ano do Filme: "))
+        diretor = input("Informe o nome do Diretor: ")
