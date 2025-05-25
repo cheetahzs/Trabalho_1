@@ -1,12 +1,7 @@
-<<<<<<< HEAD
 from controlador.controlador_filme import ControladorFilme
 
-class telaFilme:
-    
-=======
 class TelaFilme:
-
->>>>>>> 0a3bf2f912fe4dd8a9c7ead8adcafe7645c1591d
+    
     def tela_opcoes(self):
         print("\n ---------- FILMES ----------")
         print("1 - Incluir Filme")
@@ -17,7 +12,6 @@ class TelaFilme:
         print("0 - Retornar")
         opcao = int(input("Escolha uma opção: "))
         return opcao
-<<<<<<< HEAD
     
     def pega_dados_filme(self):
         print("-------DADOS DO FILME-------")
@@ -51,5 +45,3 @@ class TelaFilme:
     def pega_nome_categoria(self):
         nome = input("Nome da categoria a remover")
         return nome
-=======
->>>>>>> 0a3bf2f912fe4dd8a9c7ead8adcafe7645c1591d
