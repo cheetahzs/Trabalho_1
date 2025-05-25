@@ -1,5 +1,5 @@
-class telaFilme:
-    
+class TelaFilme:
+
     def tela_opcoes(self):
         print("\n ---------- FILMES ----------")
         print("1 - Incluir Filme")
