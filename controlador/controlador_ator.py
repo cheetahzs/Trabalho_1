@@ -14,7 +14,7 @@ class ControladorAtor():
             if ator.id == id:
                 return ator
         return None
-    
+
     def incluir_ator(self):
         dados_ator = self.__tela_ator.pega_dados_ator()
         id = dados_ator["id"]
@@ -34,7 +34,7 @@ class ControladorAtor():
             self.__tela_ator.mostra_ator({"id": ator.id, "nome": ator.nome,
                                          "data_de_nacimento": ator.data_de_nascimento,
                                          "nacionalidade": ator.nacionalidade })
-    
+
     def alterar_ator(self):
         self.lista_atores()
         id_ator = self.__tela_ator.seleciona_ator()
