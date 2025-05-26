@@ -1,6 +1,6 @@
 from limite.tela_diretor import TelaDiretor
 from entidade.diretor import Diretor
-from exceptions.diretor_repetido_exception import DiretorRepetidoException
+from exception.diretor_repetido_exception import DiretorRepetidoException
 
 
 class ControladorDiretor():

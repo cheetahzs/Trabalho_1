@@ -1,6 +1,6 @@
 from limite.tela_categoria import TelaCategoria
 from entidade.categoria import Categoria
-from exceptions.categoria_repetida_exception import CategoriaRepetidaException
+from exception.categoria_repetida_exception import CategoriaRepetidaException
 
 
 class ControladorCategoria():

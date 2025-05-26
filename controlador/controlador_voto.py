@@ -1,6 +1,6 @@
 from limite.tela_voto import TelaVoto
 from entidade.voto import Voto
-from exceptions.voto_repetido_excepion import VotoRepetidoException
+from exception.voto_repetido_excepion import VotoRepetidoException
 from entidade.membro_academia import MembroAcademia
 from entidade.categoria import Categoria
 
