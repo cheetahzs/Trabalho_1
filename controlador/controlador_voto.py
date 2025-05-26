@@ -1,8 +1,9 @@
 from limite.tela_voto import TelaVoto
 from entidade.voto import Voto
-from exception.voto_repetido_excepion import VotoRepetidoException
+from exception.voto_repetido_exception import VotoRepetidoException
 from entidade.membro_academia import MembroAcademia
 from entidade.categoria import Categoria
+from collections import defaultdict, Counter
 
 
 class ControladorVoto():
@@ -65,9 +66,29 @@ class ControladorVoto():
     def retornar(self):
         self.__controlador_sistema.abre_tela()
 
+    def apurar_vencedores(self):
+        votos_por_categoria = defaultdict(list)
+
+        for voto in self.__votos:
+            votos_por_categoria[voto.categoria].append(voto.alvo)
+
+        vencedores = {}
+        for categoria, alvos in votos_por_categoria.items():
+            contagem = Counter(alvos)
+            mais_votado = contagem.most_common(1)[0]
+            vencedores[categoria] = mais_votado
+
+        for categoria, (alvo, qtd_votos) in vencedores.items():
+            self.__tela_voto.mostra_mensagem(
+                f"Categoria: {categoria.nome} - Vencedor: {alvo.nome} com {qtd_votos} votos")
+
+        return vencedores
+
+
     def abre_tela(self):
         lista_opcoes = {1: self.incluir_voto, 2: self.alterar_voto,
-                         3: self.lista_votos, 4: self.excluir_voto, 0: self.retornar}
+                         3: self.lista_votos, 4: self.excluir_voto, 5: self.apurar_vencedores,
+                         0: self.retornar}
         continua = True
         while continua:
             lista_opcoes[self.__tela_voto.tela_opcoes()]()
