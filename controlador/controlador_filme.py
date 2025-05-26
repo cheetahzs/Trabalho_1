@@ -8,7 +8,7 @@ class ControladorFilme:
         self.__tela_filme = TelaFilme()
         self.__controlador_sistema = controlador_sistema
 
-    def pega_filme_por_id(self, id_filme):
+    def pega_filme(self, id_filme):
         for filme in self.__filmes:
             if filme.id == id_filme:
                 return filme
@@ -16,7 +16,7 @@ class ControladorFilme:
     
     def incluir_filme(self):
         dados = self.__tela_filme.pega_dados_filme()
-        if self.pega_filme_por_id(dados["id"]) is None:
+        if self.pega_filme(dados["id"]) is None:
             diretor = self.__controlador_sistema.pega_diretor(dados["id_diretor"])
             novo_filme = Filme(
                 id = dados["id"],
@@ -32,7 +32,7 @@ class ControladorFilme:
     def alterar_filme(self):
         self.lista_filmes()
         id_filme = self.__tela_filme.seleciona_filme()
-        filme = self.pega_filme_por_id(id_filme)
+        filme = self.pega_filme(id_filme)
         if filme:
             novos_dados = self.__tela_filme.pega_dados_filme()
             filme.titulo = novos_dados["titulo"]
@@ -54,7 +54,7 @@ class ControladorFilme:
     def excluir_filme(self):
         self.lista_filmes()
         id_filme = self.__tela_filme.seleciona_filme()
-        filme = self.pega_filme_por_id(id_filme)
+        filme = self.pega_filme(id_filme)
         if filme:
             self.__filmes.remove(filme)
             self.__tela_filme.mostra_mensagem("Filme removido com sucesso.")
@@ -63,7 +63,7 @@ class ControladorFilme:
             
     def gerenciar_categorias(self):
         id_filme = self.__tela_filme.seleciona_filme()
-        filme = self.pega_filme_por_id(id_filme)
+        filme = self.pega_filme(id_filme)
         if filme:
             opcao = self.__tela_filme.tela_opcoes_categoria()
             if opcao == 1:

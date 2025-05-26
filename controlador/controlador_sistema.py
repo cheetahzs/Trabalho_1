@@ -37,3 +37,35 @@ class controladorSistema:
         
     def inicializa_sistema(self):
         self.abre_tela()
+        
+    def abre_tela(self):
+        while True:
+            opcao = self.__tela_sistema.tela_opcoes()
+            
+            if opcao == 1:
+                self.__controlador_ator.abre_tela()
+            elif opcao == 2:
+                self.__controlador_categoria.abre_tela()
+            elif opcao == 3:
+                self.__controlador_diretor.abre_tela()
+            elif opcao == 4:
+                self.__controlador_filme.abre_tela()
+            elif opcao == 5:
+                self.__controlador_voto.abre_tela()
+            elif opcao == 0:
+                self.__tela_sistema.mostra_mensagem("Encerrando o sistema...")
+                break
+            else:
+                self.__tela_sistema.mostra_mensagem("Opção inválida!")
+                
+    def pega_diretor(self, id: int):
+        return self.__controlador_diretor.pega_diretor(id)
+    
+    def pega_categoria(self, nome: str):
+        return self.__controlador_categoria.pega_categoria(nome)
+    
+    def pega_ator(self, id: int):
+        return self.__controlador_ator.pega_ator(id)
+    
+    def pega_filme(self, id: int):
+        return self.__controlador_filme.pega_filme(id)
