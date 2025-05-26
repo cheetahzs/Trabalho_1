@@ -1,5 +1,3 @@
-from controlador.controlador_filme import ControladorFilme
-
 class TelaFilme:
     
     def tela_opcoes(self):

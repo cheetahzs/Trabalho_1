@@ -1,38 +1,43 @@
-from votavel import Votavel
+from categoria import Categoria
 from diretor import Diretor
 
-
-class Filme(Votavel):
-    def __init__(self, id, titulo, diretor, ano, categorias):
-        super().__init__(id)
-        self.__titulo = titulo
-        self.__diretor = diretor
-        self.__ano = ano
-        self.__categorias = []
+class Filme():
+    def __init__(self, titulo: str, diretor: Diretor, ano: int, categorias: Categoria):
+        if isinstance(titulo, str):
+            self.__titulo = titulo
+        if isinstance(diretor, Diretor):
+            self.__diretor = diretor
+        if isinstance(ano, int):
+            self.__ano = ano
+        if isinstance(categorias, Categoria):    
+            self.__categorias = []
 
     @property
     def titulo(self):
         return self.__titulo
 
     @titulo.setter
-    def titulo(self, titulo):
-        self.__titulo = titulo
+    def titulo(self, titulo: str):
+        if isinstance(titulo, str):
+            self.__titulo = titulo
 
     @property
     def diretor(self):
         return self.__diretor
 
     @diretor.setter
-    def diretor(self, diretor):
-        self.__diretor = diretor
+    def diretor(self, diretor: Diretor):
+        if isinstance(diretor, Diretor):    
+            self.__diretor = diretor
 
     @property
     def ano(self):
         return self.__ano
 
     @ano.setter
-    def ano(self, ano):
-        self.__ano = ano
+    def ano(self, ano: int):
+        if isinstance(ano, int):
+            self.__ano = ano
 
     def incluir_categoria(self, categoria):
         if categoria not in self.__categorias:
