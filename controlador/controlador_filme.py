@@ -31,7 +31,7 @@ class ControladorFilme:
             
     def lista_filmes(self):
         if not self.__filmes:
-            self.__tela.filme.mostra_mensagem("Nenhum filme cadastrado.")
+            self.__tela_filme.mostra_mensagem("Nenhum filme cadastrado.")
         for filme in self.__filmes:
             self.__tela_filme.mostra_filme({
             "id": filme.id,
@@ -46,7 +46,7 @@ class ControladorFilme:
         filme = self.pega_filme_por_id(id_filme)
         if filme:
             self.__filmes.remove(filme)
-            self.__tela.filme.mostra_mensagem("Filme removido com sucesso.")
+            self.__tela_filme.mostra_mensagem("Filme removido com sucesso.")
         else:
             self.__tela_filme.mostra_mensagem("Filme não encontrado.")
             
