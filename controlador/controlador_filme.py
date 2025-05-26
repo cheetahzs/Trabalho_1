@@ -49,3 +49,17 @@ class ControladorFilme:
             self.__tela.filme.mostra_mensagem("Filme removido com sucesso.")
         else:
             self.__tela_filme.mostra_mensagem("Filme não encontrado.")
+            
+    def gerenciar_categorias(self):
+        id_filme = self.__tela_filme.seleciona_filme()
+        filme = self.pega_filme_por_id(id_filme)
+        if filme:
+            opcao = self.__tela_filme.tela_opcoes_categoria()
+            if opcao == 1:
+                categoria = self.__controlador_sistema.pega_categoria()
+                filme.incluir_categoria(categoria)
+            elif opcao == 2:
+                nome_cat = self.__tela_filme.pega_nome_categoria()
+                filme.remover_categoria(nome_cat)
+        else:
+            self.__tela_filme.mostra_mensagem("Filme não encontrado.")
