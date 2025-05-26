@@ -1,12 +1,11 @@
 from limite.tela_filme import TelaFilme
 from entidade.filme import Filme
-from controlador_diretor import ControladorDiretor
-
 
 class ControladorFilme:
+    
     def __init__(self, controlador_sistema):
         self.__filmes = []
-        self.__telaFilme()
+        self.__tela_filme = TelaFilme()
         self.__controlador_sistema = controlador_sistema
 
     def pega_filme_por_id(self, id_filme):
@@ -16,9 +15,9 @@ class ControladorFilme:
         return None
     
     def incluir_filme(self):
-        dados = self.__tela.filme.pega_dados_filme()
-        if self.pega_filme_por_id(dados[id]) is None:
-            diretor = self.__controlador_sistema.pega_diretor_por_id(dados["id_diretor"])
+        dados = self.__tela_filme.pega_dados_filme()
+        if self.pega_filme_por_id(dados["id"]) is None:
+            diretor = self.__controlador_sistema.pega_diretor(dados["id_diretor"])
             novo_filme = Filme(
                 id = dados["id"],
                 titulo = dados["titulo"],
@@ -30,5 +29,23 @@ class ControladorFilme:
         else:
             self.__tela_filme.mostra_mensagem("Filme já existente com esse ID.")
             
+    def lista_filmes(self):
+        if not self.__filmes:
+            self.__tela.filme.mostra_mensagem("Nenhum filme cadastrado.")
+        for filme in self.__filmes:
+            self.__tela_filme.mostra_filme({
+            "id": filme.id,
+            "titulo": filme.titulo,
+            "ano": filme.ano,
+            "diretor": filme.diretor.nome
+                })
+            
     def exclui_filme(self):
         self.lista_filmes()
+        id_filme = self.__tela_filme.seleciona_filme()
+        filme = self.pega_filme_por_id(id_filme)
+        if filme:
+            self.__filmes.remove(filme)
+            self.__tela.filme.mostra_mensagem("Filme removido com sucesso.")
+        else:
+            self.__tela_filme.mostra_mensagem("Filme não encontrado.")
