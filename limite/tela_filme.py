@@ -26,7 +26,7 @@ class TelaFilme:
         print(f"ID: {dados_filme["id"]}")
         print(f"Título: {dados_filme["titulo"]}")
         print(f"Ano: {dados_filme["ano"]}")
-        print(f"Diretor: {dados_filme["Diretor"]}")
+        print(f"Diretor: {dados_filme["diretor"]}")
         
     def mostra_mensagem(self, mensagem):
         print(f"\n{mensagem}")
