@@ -1,6 +1,6 @@
 from limite.tela_ator import TelaAtor
 from entidade.ator import Ator
-from exceptions.ator_repetido_exception import AtorRepetidoException
+from exception.ator_repetido_exception import AtorRepetidoException
 
 
 class ControladorAtor():
