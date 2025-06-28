@@ -1,5 +1,5 @@
-from categoria import Categoria
-from diretor import Diretor
+from entidade.categoria import Categoria
+from entidade.diretor import Diretor
 
 class Filme():
     def __init__(self, titulo: str, diretor: Diretor, ano: int, categorias: Categoria):

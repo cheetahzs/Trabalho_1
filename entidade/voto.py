@@ -1,6 +1,6 @@
-from membro_academia import MembroAcademia
-from categoria import Categoria
-from votavel import Votavel
+from entidade.membro_academia import MembroAcademia
+from entidade.categoria import Categoria
+from entidade.votavel import Votavel
 
 
 class Voto:

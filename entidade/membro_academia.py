@@ -1,5 +1,5 @@
 from abc import ABC
-from votavel import Votavel
+from entidade.votavel import Votavel
 
 class MembroAcademia(Votavel, ABC):
     def __init__(self, id: int, nome: str, 

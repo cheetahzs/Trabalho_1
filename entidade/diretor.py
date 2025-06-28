@@ -1,4 +1,4 @@
-from membro_academia import MembroAcademia
+from entidade.membro_academia import MembroAcademia
 
 
 class Diretor(MembroAcademia):
