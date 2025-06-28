@@ -32,7 +32,7 @@ class ControladorAtor():
     def lista_atores(self):
         for ator in self.__atores:
             self.__tela_ator.mostra_ator({"id": ator.id, "nome": ator.nome,
-                                         "data_de_nacimento": ator.data_de_nascimento,
+                                         "data_de_nacimento": ator.data_nascimento,
                                          "nacionalidade": ator.nacionalidade })
 
     def alterar_ator(self):
