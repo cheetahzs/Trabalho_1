@@ -1,32 +1,96 @@
-class TelaVoto:
-    def tela_opcoes(self):
-        print("-------- VOTO ----------")
-        print("1 - Incluir Voto")
-        print("2 - Alterar Voto")
-        print("3 - Listar Voto")
-        print("4 - Excluir Voto")
-        print("5 - Apurar Vencedores")
-        print("0 - Retornar")
+import PySimpleGUI as sg
 
-        opcao = int(input("Escolha a opcao: "))
+
+class TelaVoto:
+    def __init__(self):
+        self.__window = None
+        self.init_opcoes()
+
+    def tela_opcoes(self):
+        self.init_opcoes()
+        button, values = self.open()
+        if values['1']:
+            opcao = 1
+        if values['2']:
+            opcao = 2
+        if values['3']:
+            opcao = 3
+        if values['4']:
+            opcao = 4
+        if values['5']:
+            opcao = 5
+        if values['0'] or button in (None, 'Cancelar'):
+            opcao = 0
+        self.close()
         return opcao
 
+    def init_opcoes(self):
+        sg.ChangeLookAndFeel('DarkAmber')
+        layout = [
+            [sg.Text('-------- VOTO ----------', font=("Helvica", 25))],
+            [sg.Text('Escolha sua opção', font=("Helvica", 15))],
+            [sg.Radio('Incluir Voto', "RD1", key='1')],
+            [sg.Radio('Alterar Voto', "RD1", key='2')],
+            [sg.Radio('Listar Voto', "RD1", key='3')],
+            [sg.Radio('Excluir Voto', "RD1", key='4')],
+            [sg.Radio('Apurar Vencedores', "RD1", key='4')],
+            [sg.Radio('Retornar', "RD1", key='0')],
+            [sg.Button('Confirmar'), sg.Cancel('Cancelar')]
+        ]
+        self.__window = sg.Window('Sistema de Votação do Oscar').Layout(layout)
+
     def pega_dados_voto(self):
-        print("-------- DADOS VOTO ----------")
-        membro = input("Membro: ")
-        categoria = input("Categoria: ")
-        alvo = input("Alvo: ")
+        sg.ChangeLookAndFeel('DarkAmber')
+        layout = [
+            [sg.Text('-------- DADOS VOTO ----------', font=("Helvica", 25))],
+            [sg.Text('Membro:', size=(15, 1)), sg.InputText('', key='membro')],
+            [sg.Text('Categoria:', size=(15, 1)), sg.InputText('', key='categoria')],
+            [sg.Text('Alvo:', size=(15, 1)), sg.InputText('', key='alvo')],
+            [sg.Button('Confirmar'), sg.Cancel('Cancelar')]
+        ]
+        self.__window = sg.Window('Sistema de Votação do Oscar').Layout(layout)
+
+        button, values = self.open()
+        membro = values['membro']
+        categoria = values['categoria']
+        alvo = values['alvo']
+
+        self.close()
         return {"membro": membro, "categoria": categoria, "alvo": alvo}
 
     def mostra_voto(self, dados_voto):
-        print("MEMBRO QUE VOTOU: ", dados_voto["membro"])
-        print("CATEGORIA: ", dados_voto["categoria"])
-        print("ALVO DO VOTO: ", dados_voto["alvo"])
+        string_todos_votos = ""
+        for dado in dados_voto:
+            string_todos_votos = string_todos_votos + "MEMBRO QUE VOTOU: " + int(dado["membro"]) + '\n'
+            string_todos_votos = string_todos_votos + "CATEGORIA: " + str(dado["categoria"]) + '\n'
+            string_todos_votos = string_todos_votos + "ALVO DO VOTO: " + str(dado["alvo"]) + '\n\n'
+            
+
+        sg.Popup('-------- LISTA DE VOTOS ----------', string_todos_votos)
 
     def seleciona_voto(self):
-        membro = input("Membro a ser selecionado: ")
-        categoria = input("Categoria a ser selecionado: ")
+        sg.ChangeLookAndFeel('DarkAmber')
+        layout = [
+            [sg.Text('-------- SELECIONA VOTO ----------', font=("Helvica", 25))],
+            [sg.Text('Digite o membro e categoria do voto que deseja selecionar:', font=("Helvica", 15))],
+            [sg.Text('Membro: ', size=(15, 1)), sg.InputText('', key='membro')],
+            [sg.Text('Categoria: ', size=(15, 1)), sg.InputText('', key='categoria')],
+            [sg.Button('Confirmar'), sg.Cancel('Cancelar')]
+        ]
+        self.__window = sg.Window('Sistema de Votação do Oscar').Layout(layout)
+
+        button, values = self.open()
+        membro = values['membro']
+        categoria = values['categoria']
+        self.close()
         return membro, categoria
 
     def mostra_mensagem(self, msg):
-        print(msg)
+        sg.popup("", msg)
+
+    def close(self):
+        self.__window.Close()
+
+    def open(self):
+        button, values = self.__window.Read()
+        return button, values

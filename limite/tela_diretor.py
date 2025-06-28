@@ -69,7 +69,7 @@ class TelaDiretor:
             string_todos_diretores = string_todos_diretores + "DATA DE NASCIMENTO DO DIRETOR: " + dado["data_de_nascimento"] + '\n'
             string_todos_diretores = string_todos_diretores + "NACIONALIDADE DO DIRETOR: " + dado["nacionalidade"] + '\n\n'    
 
-        sg.Popup('-------- LISTA DE ATORES ----------', string_todos_diretores)
+        sg.Popup('-------- LISTA DE DIRETORES ----------', string_todos_diretores)
 
     def seleciona_diretor(self):
         sg.ChangeLookAndFeel('DarkAmber')
