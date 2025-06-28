@@ -65,7 +65,7 @@ class TelaCategoria:
         sg.ChangeLookAndFeel('DarkAmber')
         layout = [
             [sg.Text('-------- SELECIONA CATEGORIA ----------', font=("Helvica", 25))],
-            [sg.Text('Digite o nome da categoria que deseja selecionar:', font=("Helvica", 15))]
+            [sg.Text('Digite o nome da categoria que deseja selecionar:', font=("Helvica", 15))],
             [sg.Text('Nome:', size=(15, 1)), sg.InputText('', key='nome')],
             [sg.Button('Confirmar'), sg.Cancel('Cancelar')]
         ]
