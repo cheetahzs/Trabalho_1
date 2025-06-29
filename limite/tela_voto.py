@@ -33,7 +33,7 @@ class TelaVoto:
             [sg.Radio('Alterar Voto', "RD1", key='2')],
             [sg.Radio('Listar Voto', "RD1", key='3')],
             [sg.Radio('Excluir Voto', "RD1", key='4')],
-            [sg.Radio('Apurar Vencedores', "RD1", key='4')],
+            [sg.Radio('Apurar Vencedores', "RD1", key='5')],
             [sg.Radio('Retornar', "RD1", key='0')],
             [sg.Button('Confirmar'), sg.Cancel('Cancelar')]
         ]
@@ -61,9 +61,9 @@ class TelaVoto:
     def mostra_voto(self, dados_voto):
         string_todos_votos = ""
         for dado in dados_voto:
-            string_todos_votos = string_todos_votos + "MEMBRO QUE VOTOU: " + int(dado["membro"]) + '\n'
-            string_todos_votos = string_todos_votos + "CATEGORIA: " + str(dado["categoria"]) + '\n'
-            string_todos_votos = string_todos_votos + "ALVO DO VOTO: " + str(dado["alvo"]) + '\n\n'
+            string_todos_votos = string_todos_votos + "MEMBRO QUE VOTOU: " + dado["membro"] + '\n'
+            string_todos_votos = string_todos_votos + "CATEGORIA: " + dado["categoria"] + '\n'
+            string_todos_votos = string_todos_votos + "ALVO DO VOTO: " + dado["alvo"] + '\n\n'
             
 
         sg.Popup('-------- LISTA DE VOTOS ----------', string_todos_votos)

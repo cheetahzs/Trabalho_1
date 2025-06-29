@@ -1,16 +1,18 @@
 from limite.tela_ator import TelaAtor
 from entidade.ator import Ator
 from exception.ator_repetido_exception import AtorRepetidoException
+from DAOs.ator_dao import AtorDAO
 
 
 class ControladorAtor():
     def __init__(self, controlador_sistema):
-        self.__atores = []
+        self.__ator_DAO = AtorDAO()
         self.__tela_ator = TelaAtor()
         self.__controlador_sistema = controlador_sistema
 
     def pega_ator(self, id: int):
-        for ator in self.__atores:
+        for ator in self.__ator_DAO.get_all():
+            print(ator.id)
             if ator.id == id:
                 return ator
         return None
@@ -23,17 +25,19 @@ class ControladorAtor():
             if ator == None:
                 ator = Ator(dados_ator["id"], dados_ator["nome"],
                              dados_ator["data_de_nascimento"], dados_ator["nacionalidade"])
-                self.__atores.append(ator)
+                self.__ator_DAO.add(ator)
             else:
                 raise AtorRepetidoException(id)
         except AtorRepetidoException as e:
             self.__tela_ator.mostra_mensagem(e)
 
     def lista_atores(self):
-        for ator in self.__atores:
-            self.__tela_ator.mostra_ator({"id": ator.id, "nome": ator.nome,
-                                         "data_de_nacimento": ator.data_nascimento,
+        dados_ator = []
+        for ator in self.__ator_DAO.get_all():
+            dados_ator.append({"id": ator.id, "nome": ator.nome,
+                                         "data_de_nascimento": ator.data_nascimento,
                                          "nacionalidade": ator.nacionalidade })
+        self.__tela_ator.mostra_ator(dados_ator)
 
     def alterar_ator(self):
         self.lista_atores()
@@ -46,6 +50,7 @@ class ControladorAtor():
             ator.nome = novos_dados_ator["nome"]
             ator.data_de_nascimento = novos_dados_ator["data_de_nascimento"]
             ator.nacionalidade = novos_dados_ator["nacionalidade"]
+            self.__ator_DAO.update(ator)
             self.lista_atores()
         else:
             self.__tela_ator.mostra_mensagem("Este ator nao existe")
@@ -56,7 +61,7 @@ class ControladorAtor():
         ator = self.pega_ator(id_ator)
 
         if ator is not None:
-            self.__atores.remove(ator)
+            self.__ator_DAO.remove(ator.id)
             self.lista_atores()
         else:
             self.__tela_ator.mostra_mensagem("Este ator nao existe")

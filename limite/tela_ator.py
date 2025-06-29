@@ -64,10 +64,10 @@ class TelaAtor:
     def mostra_ator(self, dados_ator):
         string_todos_atores = ""
         for dado in dados_ator:
-            string_todos_atores = string_todos_atores + "ID DO ATOR: " + int(dado["id"]) + '\n'
-            string_todos_atores = string_todos_atores + "NOME DO ATOR: " + str(dado["nome"]) + '\n'
+            string_todos_atores = string_todos_atores + "ID DO ATOR: " + str(dado["id"]) + '\n'
+            string_todos_atores = string_todos_atores + "NOME DO ATOR: " + dado["nome"] + '\n'
             string_todos_atores = string_todos_atores + "DATA DE NASCIMENTO DO ATOR: " + str(dado["data_de_nascimento"]) + '\n'
-            string_todos_atores = string_todos_atores + "NACIONALIDADE DO ATOR: " + str(dado["nacionalidade"]) + '\n\n'    
+            string_todos_atores = string_todos_atores + "NACIONALIDADE DO ATOR: " + dado["nacionalidade"] + '\n\n'    
 
         sg.Popup('-------- LISTA DE ATORES ----------', string_todos_atores)
 

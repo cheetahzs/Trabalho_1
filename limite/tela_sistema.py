@@ -35,7 +35,7 @@ class TelaSistema:
             [sg.Radio('Gerenciar Diretores', "RD1", key='3')],
             [sg.Radio('Gerenciar Filmes', "RD1", key='4')],
             [sg.Radio('Votação', "RD1", key='5')],
-            [sg.Radio('Retornar', "RD1", key='0')],
+            [sg.Radio('Finalizar Sistema', "RD1", key='0')],
             [sg.Button('Confirmar'), sg.Cancel('Cancelar')]
         ]
         self.__window = sg.Window('Sistema de Votação do Oscar').Layout(layout)

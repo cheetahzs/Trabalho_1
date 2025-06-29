@@ -1,8 +1,11 @@
 from entidade.categoria import Categoria
 from entidade.diretor import Diretor
+from entidade.votavel import Votavel
 
-class Filme():
-    def __init__(self, titulo: str, diretor: Diretor, ano: int, categorias: Categoria):
+
+class Filme(Votavel):
+    def __init__(self, id: int, titulo: str, diretor: Diretor, ano: int, categorias: Categoria):
+        super().__init__(id)
         if isinstance(titulo, str):
             self.__titulo = titulo
         if isinstance(diretor, Diretor):
