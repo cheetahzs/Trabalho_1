@@ -1,86 +1,70 @@
-from limite.tela_filme import TelaFilme
 from entidade.filme import Filme
+from limite.tela_filme import TelaFilme
+from exception.filme_repetido_exception import FilmeRepetidoException
 
-class ControladorFilme:
+class ControladorFilme():
     
     def __init__(self, controlador_sistema):
         self.__filmes = []
         self.__tela_filme = TelaFilme()
         self.__controlador_sistema = controlador_sistema
-
-    def pega_filme(self, id_filme):
+        
+    def pega_filme(self, id: int):
         for filme in self.__filmes:
-            if filme.id == id_filme:
+            if filme.id == id:
                 return filme
-        return None
-    
-    def incluir_filme(self):
-        dados = self.__tela_filme.pega_dados_filme()
-        if self.pega_filme(dados["id"]) is None:
-            diretor = self.__controlador_sistema.pega_diretor(dados["id_diretor"])
-            novo_filme = Filme(
-                id = dados["id"],
-                titulo = dados["titulo"],
-                diretor = diretor,
-                ano = dados["ano"],
-                categorias = []
-            )
-            self.__filmes.append(novo_filme)
-        else:
-            self.__tela_filme.mostra_mensagem("Filme já existente com esse ID.")
             
+    def incluir_filme(self):
+        dados_filme = self.__tela_filme.pega_dados_filme()
+        id = dados_filme["id"]
+        filme = self.pega_filme(id)
+        try: 
+            if filme == None:
+                filme = Filme(dados_filme["id"], dados_filme["titulo"], 
+                              dados_filme["nome_diretor"], dados_filme["ano"])
+                self.__filmes.append(filme)
+            else:
+                raise FilmeRepetidoException(id)
+        except FilmeRepetidoException as e:
+            self.__tela_filme.mostra_mensagem(e)
+    
     def alterar_filme(self):
         self.lista_filmes()
         id_filme = self.__tela_filme.seleciona_filme()
         filme = self.pega_filme(id_filme)
-        if filme:
-            novos_dados = self.__tela_filme.pega_dados_filme()
-            filme.titulo = novos_dados["titulo"]
-            filme.ano = novos_dados["ano"]
-            novo_diretor = self.__controlador_sistema.pega_diretor_por_id(novos_dados["id_diretor"])
-            filme.diretor = novo_diretor
-            
-    def lista_filmes(self):
-        if not self.__filmes:
-            self.__tela_filme.mostra_mensagem("Nenhum filme cadastrado.")
-        for filme in self.__filmes:
-            self.__tela_filme.mostra_filme({
-            "id": filme.id,
-            "titulo": filme.titulo,
-            "ano": filme.ano,
-            "diretor": filme.diretor.nome
-                })
-            
+        
+        if(filme is not None):
+            novos_dados_filme = self.__tela_filme.pega_dados_filme()
+            filme.id = novos_dados_filme["id"]
+            filme.titulo = novos_dados_filme["titulo"]
+            filme.ano = novos_dados_filme["ano"]
+            filme.diretor = novos_dados_filme["nome_diretor"]
+            self.lista_filmes()
+        else:
+            self.__tela_filme.mostra_mensagem("Este filme não existe.")
+    
     def excluir_filme(self):
         self.lista_filmes()
         id_filme = self.__tela_filme.seleciona_filme()
         filme = self.pega_filme(id_filme)
-        if filme:
+        
+        if filme is not None:
             self.__filmes.remove(filme)
-            self.__tela_filme.mostra_mensagem("Filme removido com sucesso.")
+            self.lista_filmes()
         else:
-            self.__tela_filme.mostra_mensagem("Filme não encontrado.")
-            
-    def gerenciar_categorias(self):
-        id_filme = self.__tela_filme.seleciona_filme()
-        filme = self.pega_filme(id_filme)
-        if filme:
-            opcao = self.__tela_filme.tela_opcoes_categoria()
-            if opcao == 1:
-                categoria = self.__controlador_sistema.pega_categoria()
-                filme.incluir_categoria(categoria)
-            elif opcao == 2:
-                nome_cat = self.__tela_filme.pega_nome_categoria()
-                filme.remover_categoria(nome_cat)
-        else:
-            self.__tela_filme.mostra_mensagem("Filme não encontrado.")
+            self.__tela_filme.mostra_mensagem("Este filme não existe.")
             
     def retornar(self):
-        self.__controlador_sistema.abre_tela()
+        return self.__controlador_sistema.abre_tela()
+    
+    def lista_filmes(self):
+        for filme in self.__filmes:
+            self.__tela_filme.mostra_filme({"id": filme.id, "titulo": filme.titulo,
+                                             "nome_diretor": filme.nome_diretor, "ano": filme.ano})
             
     def abre_tela(self):
         lista_opcoes = {1: self.incluir_filme, 2: self.alterar_filme,
-                         3: self.lista_filmes, 4: self.excluir_filme, 0: self.retornar}
+                        3: self.lista_filmes, 4: self.excluir_filme, 0: self.retornar}
         continua = True
         while continua:
             lista_opcoes[self.__tela_filme.tela_opcoes()]()

@@ -1,45 +1,35 @@
 class TelaFilme:
     
     def tela_opcoes(self):
-        print("\n ---------- FILMES ----------")
+        print("\n------- FILMES -------")
         print("1 - Incluir Filme")
-        print("2 - Alterar filme")
-        print("3 - Listar Filmes")
+        print("2 - Alterar Filme")
+        print("3 - Listar Filme")
         print("4 - Excluir Filme")
-        print("5 - Gerenciar Categorias")
         print("0 - Retornar")
+        
         opcao = int(input("Escolha uma opção: "))
         return opcao
     
     def pega_dados_filme(self):
-        print("-------DADOS DO FILME-------")
-        id = int(input("Informe o ID do Filme: "))
-        titulo = input("Informe o Titulo: ")
-        ano = int(input("Informe o ano do Filme: "))
-        id_diretor = int(input("Informe o nome do Diretor: "))
-        return {"id": id, "titulo": titulo, "ano": ano, "id_diretor": id_diretor}
+        print("------- DADOS DO FILME -------")
+        id = input("Id do filme: ")
+        titulo = input("Titulo do filme: ")
+        ano = input("Ano do filme: ")
+        nome_diretor = input("Nome do Diretor: ")
+        return {"id": id, "titulo": titulo, "ano": ano, "nome_diretor": nome_diretor}
     
     def mostra_filme(self, dados_filme):
-        print("\n----- FILME -----")
-        print("ID: ", dados_filme["id"])
-        print("Título: ", dados_filme["titulo"])
-        print("Ano: ", dados_filme["ano"])
-        print("Diretor: ", dados_filme["diretor"])
-        
-    def mostra_mensagem(self, mensagem):
-        print(f"\n{mensagem}")
-        
+        print("\n------- LISTA DE FILMES -------")
+        print("ID DO FILME", dados_filme["id"])
+        print("TITULO DO FILME", dados_filme["titulo"])
+        print("NOME DO DIRETOR", dados_filme["nome_diretor"])
+        print("ANO DO FILME", dados_filme["ano"])
+
+    
     def seleciona_filme(self):
-        id = int(input("\nDigite o ID do Filme: "))
-        return id
+        filme = input("Id do filme a ser selecionado: ")
+        return filme
     
-    def tela_opcoes_categoria(self):
-        print("\n----- CATEGORIAS DO FILME -----")
-        print("\n1 - Adicionar Categoria")
-        print("\n2 - Remover Categoria")
-        opcao = int(input("Escolha uma opção: "))
-        return opcao
-    
-    def pega_nome_categoria(self):
-        nome = input("Nome da categoria a remover")
-        return nome
+    def mostra_mensagem(self, msg):
+        print(msg)
