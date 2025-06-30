@@ -36,8 +36,6 @@ class TelaAtor:
         ]
         self.__window = sg.Window('Sistema de Votação do Oscar').Layout(layout)
 
-
-
     def pega_dados_ator(self):
         sg.ChangeLookAndFeel('DarkAmber')
         layout = [
@@ -59,7 +57,6 @@ class TelaAtor:
         self.close()
         return {"id": id, "nome": nome, "data_de_nascimento": data_de_nascimento,
                 "nacionalidade": nacionalidade}
-
 
     def mostra_ator(self, dados_ator):
         string_todos_atores = ""
@@ -85,7 +82,6 @@ class TelaAtor:
         id = int(values['id'])
         self.close()
         return id
-
 
     def mostra_mensagem(self, msg):
         sg.popup("", msg)

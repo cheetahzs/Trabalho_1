@@ -2,7 +2,6 @@ from DAOs.dao import DAO
 from entidade.diretor import Diretor
 
 
-#cada entidade terá uma classe dessa, implementação bem simples.
 class DiretorDAO(DAO):
     def __init__(self):
         super().__init__('diretores.pkl')
@@ -19,6 +18,6 @@ class DiretorDAO(DAO):
         if isinstance(key, int):
             return super().get(key)
 
-    def remove(selfself, key:int):
+    def remove(self, key:int):
         if(isinstance(key, int)):
             return super().remove(key)

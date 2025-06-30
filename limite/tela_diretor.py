@@ -64,7 +64,7 @@ class TelaDiretor:
     def mostra_diretor(self, dados_diretor):
         string_todos_diretores = ""
         for dado in dados_diretor:
-            string_todos_diretores = string_todos_diretores + "ID DO DIRETOR: " + dado["id"] + '\n'
+            string_todos_diretores = string_todos_diretores + "ID DO DIRETOR: " + str(dado["id"]) + '\n'
             string_todos_diretores = string_todos_diretores + "NOME DO DIRETOR: " + dado["nome"] + '\n'
             string_todos_diretores = string_todos_diretores + "DATA DE NASCIMENTO DO DIRETOR: " + dado["data_de_nascimento"] + '\n'
             string_todos_diretores = string_todos_diretores + "NACIONALIDADE DO DIRETOR: " + dado["nacionalidade"] + '\n\n'    
