@@ -16,7 +16,20 @@ class ControladorDiretor():
             if diretor.id == id:
                 return diretor
         return None
-    
+
+    def pega_diretor_por_nome(self, nome: str):
+        for diretor in self.__dao.get_all():
+            if diretor.nome == nome:
+                return diretor
+        return None
+
+    def pega_diretor_por_nome(self, nome: str):
+        for diretor in self.__diretor_DAO.get_all():
+            print(diretor.nome)
+            if diretor.nome == nome:
+                return diretor
+        return None
+
     def incluir_diretor(self):
         dados_diretor = self.__tela_diretor.pega_dados_diretor()
         id = dados_diretor["id"]
@@ -35,7 +48,7 @@ class ControladorDiretor():
         dados_diretor = []
         for diretor in self.__diretor_DAO.get_all():
             dados_diretor.append({"id": diretor.id, "nome": diretor.nome,
-                                         "data_de_nacimento": diretor.data_nascimento,
+                                         "data_de_nascimento": diretor.data_nascimento,
                                          "nacionalidade": diretor.nacionalidade })
         self.__tela_diretor.mostra_diretor(dados_diretor)
 

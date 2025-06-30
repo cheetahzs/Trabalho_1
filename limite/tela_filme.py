@@ -20,16 +20,17 @@ class TelaFilme:
         if values['0'] or button in (None, 'Cancelar'):
             opcao = 0
         self.close()
+        return opcao
 
     def init_opcoes(self):
         sg.ChangeLookAndFeel('DarkAmber')
         layout = [
-            [sg.Text('-------- ATOR ----------', font=("Helvica", 25))],
+            [sg.Text('-------- FILME ----------', font=("Helvica", 25))],
             [sg.Text('Escolha sua opção', font=("Helvica", 15))],
-            [sg.Radio('Incluir Ator', "RD1", key='1')],
-            [sg.Radio('Alterar Ator', "RD1", key='2')],
-            [sg.Radio('Listar Ator', "RD1", key='3')],
-            [sg.Radio('Excluir Ator', "RD1", key='4')],
+            [sg.Radio('Incluir Filme', "RD1", key='1')],
+            [sg.Radio('Alterar Filme', "RD1", key='2')],
+            [sg.Radio('Listar Filme', "RD1", key='3')],
+            [sg.Radio('Excluir Filme', "RD1", key='4')],
             [sg.Radio('Retornar', "RD1", key='0')],
             [sg.Button('Confirmar'), sg.Cancel('Cancelar')]
         ]
@@ -61,9 +62,9 @@ class TelaFilme:
         string_todos_filmes = ""
         for dado in dados_filme:
             string_todos_filmes = string_todos_filmes + "ID DO FILME: " + str(dado["id"]) + '\n'
-            string_todos_filmes = string_todos_filmes + "TITULO DO FILME: " + dado["nome"] + '\n'
-            string_todos_filmes = string_todos_filmes + "ANO DO FILME: " + str(dado["data_de_nascimento"]) + '\n'
-            string_todos_filmes = string_todos_filmes + "DIRETOR DO FILME: " + dado["nacionalidade"] + '\n\n'    
+            string_todos_filmes = string_todos_filmes + "TITULO DO FILME: " + dado["titulo"] + '\n'
+            string_todos_filmes = string_todos_filmes + "ANO DO FILME: " + str(dado["ano"]) + '\n'
+            string_todos_filmes = string_todos_filmes + "DIRETOR DO FILME: " + dado["diretor"] + '\n\n'    
 
         sg.Popup('-------- LISTA DE FILMES ----------', string_todos_filmes)
 
@@ -83,6 +84,7 @@ class TelaFilme:
         button, values = self.open()
         id = int(values['id'])
         self.close()
+        return id
     
     def tela_opcoes_categoria(self):
         self.init_opcoes_categoria()
@@ -94,6 +96,7 @@ class TelaFilme:
         if values['0'] or button in (None, 'Cancelar'):
             opcao = 0
         self.close()
+        return opcao
 
     def init_opcoes_categoria(self):
         sg.ChangeLookAndFeel('DarkAmber')

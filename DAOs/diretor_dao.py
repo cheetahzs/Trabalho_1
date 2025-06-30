@@ -21,3 +21,9 @@ class DiretorDAO(DAO):
     def remove(self, key:int):
         if(isinstance(key, int)):
             return super().remove(key)
+
+    def pega_por_nome(self, nome):
+        for diretor in self.get_all():
+            if diretor.nome == nome:
+                return diretor
+        return None

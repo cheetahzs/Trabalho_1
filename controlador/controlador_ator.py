@@ -17,6 +17,12 @@ class ControladorAtor():
                 return ator
         return None
 
+    def pega_ator_por_nome(self, nome: str):
+        for ator in self.__dao.get_all():
+            if ator.nome == nome:
+                return ator
+        return None
+
     def incluir_ator(self):
         dados_ator = self.__tela_ator.pega_dados_ator()
         id = dados_ator["id"]

@@ -42,21 +42,31 @@ class TelaVoto:
     def pega_dados_voto(self):
         sg.ChangeLookAndFeel('DarkAmber')
         layout = [
-            [sg.Text('-------- DADOS VOTO ----------', font=("Helvica", 25))],
-            [sg.Text('Membro:', size=(15, 1)), sg.InputText('', key='membro')],
-            [sg.Text('Categoria:', size=(15, 1)), sg.InputText('', key='categoria')],
-            [sg.Text('Alvo:', size=(15, 1)), sg.InputText('', key='alvo')],
+            [sg.Text('-------- NOVO VOTO ----------', font=("Helvica", 25))],
+            [sg.Text('ID do membro:', size=(20, 1)), sg.InputText('', key='membro_id')],
+            [sg.Text('Nome da categoria:', size=(20, 1)), sg.InputText('', key='categoria')],
+            [sg.Text('ID do alvo:', size=(20, 1)), sg.InputText('', key='alvo_id')],
             [sg.Button('Confirmar'), sg.Cancel('Cancelar')]
         ]
-        self.__window = sg.Window('Sistema de Votação do Oscar').Layout(layout)
 
-        button, values = self.open()
-        membro = values['membro']
-        categoria = values['categoria']
-        alvo = values['alvo']
+        window = sg.Window('Sistema de Votação do Oscar').Layout(layout)
+        button, values = window.Read()
+        window.Close()
 
-        self.close()
-        return {"membro": membro, "categoria": categoria, "alvo": alvo}
+        # Conversão e validação
+        try:
+            membro_id = int(values['membro_id'])
+            alvo_id = int(values['alvo_id'])
+            categoria = values['categoria'].strip()
+        except (ValueError, TypeError):
+            sg.popup("Erro: Informe valores válidos.")
+            return self.pega_dados_voto()
+
+        return {
+            "membro_id": membro_id,
+            "categoria": categoria,
+            "alvo_id": alvo_id
+        }
 
     def mostra_voto(self, dados_voto):
         string_todos_votos = ""
