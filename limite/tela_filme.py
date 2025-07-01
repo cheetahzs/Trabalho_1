@@ -21,6 +21,7 @@ class TelaFilme:
         if values['0'] or button in (None, 'Cancelar'):
             opcao = 0
         self.close()
+        
         return opcao
     
     def init_opcoes(self):
@@ -57,19 +58,17 @@ class TelaFilme:
         nome_diretor = values['nome_diretor']
         
         self.close()
-        return {"id": id, "titulo": titulo, "ano": ano, "nome_diretor": nome_diretor}
-        
+        return {"id": id, "titulo": titulo, "ano": ano, "nome_diretor": nome_diretor}  
     
     def mostra_filme(self, dados_filme):
         string_todos_filmes = ""
         for dado in dados_filme:
             string_todos_filmes = string_todos_filmes + "ID DO FILME: " + str(dado["id"]) + '\n'
-            string_todos_filmes = string_todos_filmes + "TITULO DO FILME: " + str(dado["titulo"]) + '\n'
-            string_todos_filmes = string_todos_filmes + "NOME DO DIRETOR: " + str(dado["nome_diretor"]) + '\n'
-            string_todos_filmes = string_todos_filmes + "ANO DO FILME: " + str(dado["ano"])
-        
-        sg.Popup('------- LISTA DE FILMES -------', string_todos_filmes)
-        
+            string_todos_filmes = string_todos_filmes + "TITULO DO FILME: " + dado["titulo"] + '\n'
+            string_todos_filmes = string_todos_filmes + "ANO DO FILME: " + str(dado["ano"]) + '\n'
+            string_todos_filmes = string_todos_filmes + "DIRETOR DO FILME: " + dado["diretor"] + '\n\n'    
+
+        sg.Popup('-------- LISTA DE FILMES ----------', string_todos_filmes)
         
     def seleciona_filme(self):
         sg.theme('DarkAmber')
@@ -85,9 +84,30 @@ class TelaFilme:
         self.close()
         return id
     
-    def mostra_mensagem(self, msg):
-        sg.popup("", msg)
-        
+    def tela_opcoes_categoria(self):
+        self.init_opcoes_categoria()
+        button, values = self.open()
+        if values['1']:
+            opcao = 1
+        if values['2']:
+            opcao = 2
+        if values['0'] or button in (None, 'Cancelar'):
+            opcao = 0
+        self.close()
+        return opcao
+
+    def init_opcoes_categoria(self):
+        sg.ChangeLookAndFeel('DarkAmber')
+        layout = [
+            [sg.Text('-------- CATEGORIAS DO FILME ----------', font=("Helvica", 25))],
+            [sg.Text('Escolha sua opção', font=("Helvica", 15))],
+            [sg.Radio('Incluir Categoria', "RD1", key='1')],
+            [sg.Radio('Alterar Categoria', "RD1", key='2')],
+            [sg.Radio('Retornar', "RD1", key='0')],
+            [sg.Button('Confirmar'), sg.Cancel('Cancelar')]
+        ]
+        self.__window = sg.Window('Sistema de Votação do Oscar').Layout(layout)
+
     def close(self):
         self.__window.Close()
         

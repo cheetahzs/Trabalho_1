@@ -66,7 +66,7 @@ class TelaDiretor:
         for dado in dados_diretor:
             string_todos_diretores = string_todos_diretores + "ID DO DIRETOR: " + str(dado["id"]) + '\n'
             string_todos_diretores = string_todos_diretores + "NOME DO DIRETOR: " + dado["nome"] + '\n'
-            string_todos_diretores = string_todos_diretores + "DATA DE NASCIMENTO DO DIRETOR: " + dado["data_de_nascimento"] + '\n'
+            string_todos_diretores = string_todos_diretores + "DATA DE NASCIMENTO DO DIRETOR: " + str(dado["data_de_nascimento"]) + '\n'
             string_todos_diretores = string_todos_diretores + "NACIONALIDADE DO DIRETOR: " + dado["nacionalidade"] + '\n\n'    
 
         sg.Popup('-------- LISTA DE DIRETORES ----------', string_todos_diretores)
@@ -85,7 +85,6 @@ class TelaDiretor:
         id = int(values['id'])
         self.close()
         return id
-
 
     def mostra_mensagem(self, msg):
         sg.popup("", msg)

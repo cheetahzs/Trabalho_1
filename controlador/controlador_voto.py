@@ -20,13 +20,43 @@ class ControladorVoto():
 
     def incluir_voto(self):
         dados_voto = self.__tela_voto.pega_dados_voto()
-        membro = dados_voto["membro"]
-        categoria = dados_voto["categoria"]
-        voto = self.pega_voto(membro, categoria)
+
+        id_membro = dados_voto["membro_id"]
+        nome_categoria = dados_voto["categoria"]
+        id_alvo = dados_voto["alvo_id"]
+
+        # Buscar membro por ID (em Ator ou Diretor)
+        membro = self.__controlador_sistema.controlador_ator.pega_ator(id_membro)
+        if not membro:
+            membro = self.__controlador_sistema.controlador_diretor.pega_diretor(id_membro)
+        if not membro:
+            self.__tela_voto.mostra_mensagem("Membro não encontrado.")
+            return
+
+        # Buscar categoria por nome
+        categoria = self.__controlador_sistema.controlador_categoria.pega_por_nome(nome_categoria)
+        if not categoria:
+            self.__tela_voto.mostra_mensagem("Categoria não encontrada.")
+            return
+
+        # Buscar alvo por ID conforme o tipo da categoria
+        alvo = None
+        if categoria.tipo == "Filme":
+            alvo = self.__controlador_sistema.controlador_filme.pega_filme(id_alvo)
+        elif categoria.tipo == "Ator":
+            alvo = self.__controlador_sistema.controlador_ator.pega_ator(id_alvo)
+        elif categoria.tipo == "Diretor":
+            alvo = self.__controlador_sistema.controlador_diretor.pega_diretor(id_alvo)
+
+        if not alvo:
+            self.__tela_voto.mostra_mensagem("Alvo não encontrado.")
+            return
+
+        # Verifica se já existe voto
+        voto_existente = self.pega_voto(membro, categoria)
         try:
-            if voto == None:
-                voto = Voto(dados_voto["membro"], dados_voto["categoria"],
-                             dados_voto["alvo"])
+            if not voto_existente:
+                voto = Voto(membro, categoria, alvo)
                 self.__votos.append(voto)
             else:
                 raise VotoRepetidoException(membro.nome)
